@@ -1,37 +1,41 @@
--- branchpaster v1.1
+-- branchpaster v1.2
 -- markus behrens 2019
 
 function branchpaster()
 	hs.eventtap.keyStroke({"cmd"}, "c")
+	hs.focus()
 
 	content = hs.pasteboard.getContents()
-	button, version = hs.dialog.textPrompt("Version:", "", "4.1.0")
+	button, version = hs.dialog.textPrompt("Version:", "", "4.2.0")
 	temp = content
 	category = "?"
 
-	if string.gmatch(content, "^.*Fehler ") then
-		temp = string.gsub(content, "^.*Fehler ", "")
+	if string.sub(content, 0, 7) == "Fehler " then
+		temp = string.sub(content, 8)
 		category = "bug"
-	elseif string.gmatch(content, "^.*Aufgabe ") then
-		temp = string.gsub(content, "^.*Aufgabe ", "")
+	elseif string.sub(content, 0, 8) == "Aufgabe " then
+		temp = string.sub(content, 9)
 		category = "feature"
-	elseif string.gmatch(content, "^.*User Story ") then
-		temp = string.gsub(content, "^.*User Story ", "")
+	elseif string.sub(content, 0, 11) == "User Story " then
+		temp = string.sub(content, 12)
 		category = "feature"
-	elseif string.gmatch(content, "^.*Epic ") then
-		temp = string.gsub(content, "^.*Epic ", "")
+	elseif string.sub(content, 0, 5) == "Epic " then
+		temp = string.sub(content, 6)
 		category = "feature"
 	end
 
 	number = string.gsub(temp, ":.*$", "")
-	text = string.gsub(temp, number, "")
-	text = string.gsub(text, ":iPad: ", "")
+	text = string.gsub(temp, number .. ":", "")
+	text = string.gsub(text, "iPad: ", "")
 	text = string.gsub(text, " ", "-")
 	text = string.gsub(text, ":", "-")
 	text = string.gsub(text, "%-%-", "-")
 	text = string.gsub(text, "ä", "ae")
+	text = string.gsub(text, "Ä", "Ae")
 	text = string.gsub(text, "ö", "oe")
+	text = string.gsub(text, "Ö", "Oe")
 	text = string.gsub(text, "ü", "ue")
+	text = string.gsub(text, "Ü", "Ue")
 	text = string.gsub(text, "ß", "ss")
 	text = string.gsub(text, "%.", "")
 	text = string.gsub(text, "%,", "")
