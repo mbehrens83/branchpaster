@@ -17,6 +17,9 @@ Inhalt des Scripts in das Textfeld einfügen. Speichern.
 Fenster schließen und danach: 
 > Menubar > Hammerspoon > Reload Config
 
+Hammerspoon Berechtigungen u. a. für die Zwischenablage erteilen:
+> Menubar > Hammerspoon > Preferences... > Enable Accessibility
+
 ## Verwendung
 TFS Titelzeile des Tickets markieren und mit „Command“ + „<" oder „Control“ + „<„ in die Zwischenablage kopieren.
 > z.B.: "Fehler 64673: Button ist aktiv auch wenn keine Daten existieren."
